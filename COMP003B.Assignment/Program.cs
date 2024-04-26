@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Mvc.Formatters;
 namespace COMP003B.Assignment
 {
     public class Program
@@ -9,7 +9,11 @@ namespace COMP003B.Assignment
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
